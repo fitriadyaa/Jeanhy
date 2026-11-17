@@ -38,6 +38,17 @@ test('birthday marquee loops continuously and reacts to scrolling with reduced-m
   assert.match(page, /position: sticky/);
 });
 
+test('mobile player reserves space for controls in portrait and short landscape', () => {
+  const controls = readFileSync(new URL('../src/components/cd-case/PlayerControls.js', import.meta.url), 'utf8');
+  assert.match(page, /\.birthday-scroll \{ width: 100%; min-width: 0;/);
+  assert.match(page, /\.cd\[data-player\] \.cd-stage \{ bottom: calc\(200px \+ env\(safe-area-inset-bottom\)\);/);
+  for (const source of [page, controls]) {
+    assert.match(source, /@media \(max-height: 500px\) and \(min-width: 480px\)/);
+  }
+  assert.match(controls, /max-width: calc\(100% - 32px\)/);
+  assert.match(controls, /right: max\(16px, env\(safe-area-inset-right\)\); transform: translateY\(-50%\); width: 268px;/);
+});
+
 test('foil follows pointer, clamps outside coordinates, and respects reduced motion', () => {
   const properties = {};
   let reduced = false;

@@ -84,11 +84,17 @@ export default function CdCase() {
       data-player={player || undefined}
     >
       <Head>
-        <title>CD Case</title>
+        <title>Happy Birthday Heeyeon</title>
         <meta
           name="description"
-          content="Open a clear CD case, lift the record onto a quiet player, and take a moment to listen."
+          content="Happy birthday, Heeyeon — our autumn girl, our guitar hero. A little holographic magic and music, made for you."
         />
+        <meta property="og:title" content="Happy Birthday Heeyeon" />
+        <meta property="og:description" content="Happy birthday, Heeyeon — our autumn girl, our guitar hero. A little holographic magic and music, made for you." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Happy Birthday Heeyeon" />
+        <meta name="twitter:description" content="Happy birthday, Heeyeon — our autumn girl, our guitar hero. A little holographic magic and music, made for you." />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, viewport-fit=cover"
@@ -260,7 +266,7 @@ export default function CdCase() {
           pointer-events: none;
           z-index: 1;
         }
-        .birthday-scroll { transform: rotate(-5deg) scale(1.08); }
+        .birthday-scroll { width: 100%; min-width: 0; transform: rotate(-5deg) scale(1.08); }
         .birthday-row { padding: .025em 0 .08em; overflow: hidden; }
         .birthday-track {
           display: flex;
@@ -345,8 +351,15 @@ export default function CdCase() {
           }
         }
         @media (max-width: 720px) {
-          .birthday-copy { font-size: clamp(72px, 20vw, 144px); }
+          .birthday-copy { font-size: clamp(56px, 18vw, 120px); }
           .birthday-row { padding-block: 10px; }
+          .cd[data-player] .cd-stage { bottom: calc(200px + env(safe-area-inset-bottom)); }
+        }
+        @media (max-height: 500px) and (min-width: 480px) {
+          .birthday-copy { font-size: min(13.5vw, 20svh); }
+          .birthday-row { padding-block: 5px; }
+          .cd[data-player] .cd-stage { right: calc(300px + env(safe-area-inset-right)); bottom: 0; }
+          .cd[data-player] { --player-disc-x: calc((100% - 300px - env(safe-area-inset-right)) / 2); }
         }
         @media (prefers-reduced-motion: reduce) {
           .opener { --opener-height: 100svh; }

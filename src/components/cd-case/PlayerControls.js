@@ -86,7 +86,7 @@ const PlayerControls = forwardRef(function PlayerControls({ disc, active, onPlay
       <style jsx global>{`
         .cd-disc-return { position: absolute; top: var(--player-disc-y); left: var(--player-disc-x, 50%); transform: translate(-50%, -50%); pointer-events: none; width: var(--player-disc-size); height: var(--player-disc-size); border: 0; padding: 0; border-radius: 50%; background: transparent; cursor: pointer; }
         .cd-disc-return:focus-visible { outline: 2px solid #55555b; outline-offset: 5px; }
-        .cd-player-controls { position: absolute; top: calc(var(--player-controls-y, 70%) + 16px); left: 50%; transform: translateX(-50%); width: min(var(--player-controls-width, 300px), 360px); padding: 14px 18px; border: 1px solid rgba(17, 17, 20, .08); border-radius: 20px; background: rgba(255, 255, 255, .72); box-shadow: 0 10px 30px -12px rgba(17, 17, 20, .16), inset 0 1px 0 #fff; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: #111114; animation: player-arrive .6s ease both; }
+        .cd-player-controls { position: absolute; top: calc(var(--player-controls-y, 70%) + 16px); left: 50%; transform: translateX(-50%); width: min(var(--player-controls-width, 300px), 360px); max-width: calc(100% - 32px); padding: 14px 18px; border: 1px solid rgba(17, 17, 20, .08); border-radius: 20px; background: rgba(255, 255, 255, .72); box-shadow: 0 10px 30px -12px rgba(17, 17, 20, .16), inset 0 1px 0 #fff; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: #111114; animation: player-arrive .6s ease both; }
         .cd-player-controls[hidden] { display: none; }
         .cd-player-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
         .cd-player-label { margin: 0 0 5px; font-size: 8px; letter-spacing: .16em; color: rgba(17, 17, 20, .48); }
@@ -111,6 +111,12 @@ const PlayerControls = forwardRef(function PlayerControls({ disc, active, onPlay
           .cd-player-heading > div { min-width: 0; }
           .cd-player-heading h2 { overflow-wrap: anywhere; }
           .cd-player-play { width: 44px; height: 44px; }
+          .cd-player-progress { height: 44px; }
+        }
+        @media (max-height: 500px) and (min-width: 480px) {
+          .cd-player-controls { top: 50%; bottom: auto; left: auto; right: max(16px, env(safe-area-inset-right)); transform: translateY(-50%); width: 268px; }
+          .cd-player-heading > div { min-width: 0; }
+          .cd-player-heading h2 { overflow-wrap: anywhere; }
           .cd-player-progress { height: 44px; }
         }
         @media (max-height: 600px) { .cd-player-controls { padding: 9px 14px; } .cd-player-label { display: none; } .cd-player-play { width: 44px; height: 44px; } .cd-player-progress { margin-top: 0; } .cd-player-status { margin-top: 3px; } }
